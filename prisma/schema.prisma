@@ -1,0 +1,97 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+model AuthUser {
+    id                String        @id @unique
+    firstName         String
+    lastName          String
+    gender            String
+    caste             String
+    dateOfBirth       DateTime
+    timeOfBirth       String
+    state             String        
+    city              String
+    country           String
+    maritalStatus     String
+    mobileNumber      String        @unique
+    email             String        @unique
+    profilePictureUrl String
+    isPaid            Boolean       @default(false)
+    isProfileComplete Boolean       @default(false)
+    auth_session      AuthSession[]
+    auth_key          AuthKey[]
+    Bookmark          Bookmark[]
+    Connection        Connection[]
+    details           details[]
+
+    @@map("auth_user")
+}
+
+model Connection {
+    id         String   @id @unique @default(uuid())
+    senderId   String
+    receiverId String
+    status     String   @default("pending")
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    user       AuthUser @relation(references: [id], fields: [senderId], onDelete: Cascade)
+
+    @@index([senderId])
+}
+
+model Bookmark {
+    id               String   @id @unique @default(uuid())
+    userId           String
+    bookmarkedUserId String
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+    user             AuthUser @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@index([userId])
+}
+
+model AuthSession {
+    id             String   @id @unique
+    user_id        String
+    active_expires BigInt
+    idle_expires   BigInt
+    auth_user      AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@map("auth_session")
+}
+
+model AuthKey {
+    id              String   @id @unique
+    hashed_password String?
+    user_id         String
+    expires         BigInt?
+    auth_user       AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@map("auth_key")
+}
+
+model details {
+    id                   String   @id @unique @default(uuid())
+    userId               String
+    personal_details     Json
+    medical_details      Json
+    spiritual_details    Json
+    lifestyle_details    Json
+    educational_details  Json
+    professional_details Json
+    family_details       Json
+    partner_preferences  Json
+    astrology_details    Json
+    AuthUser             AuthUser @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@index([userId])
+}
