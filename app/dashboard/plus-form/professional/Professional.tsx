@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { careers } from "@/options";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const professionalSchema = z.object({
   profession: z.string({ required_error: "Professional is required" }),
@@ -31,13 +32,14 @@ const professionalSchema = z.object({
 });
 
 export default function ProfessionalDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof professionalSchema>>({
     resolver: zodResolver(professionalSchema),
   });
 
   function onSubmit(values: z.infer<typeof professionalSchema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/plus-form/education");
   }
 
   return (

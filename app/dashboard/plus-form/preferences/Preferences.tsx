@@ -35,6 +35,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const partnerPreferencesSchema = z
   .object({
@@ -161,13 +162,14 @@ const partnerPreferencesSchema = z
   });
 
 export default function PartnerPreferences() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof partnerPreferencesSchema>>({
     resolver: zodResolver(partnerPreferencesSchema),
   });
 
   function onSubmit(values: z.infer<typeof partnerPreferencesSchema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/plus-form/astrology");
   }
 
   return (

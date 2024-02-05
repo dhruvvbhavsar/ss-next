@@ -22,6 +22,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const MedicalScema = z
   .object({
@@ -40,35 +41,29 @@ const MedicalScema = z
   })
   .refine((data) => {
     if (data.haveMedicalCondition) {
-      if (
-        !data.currentMedicalInfo ||
-        data.currentMedicalInfo === "others" ||
-        !data.otherMedicalInfo
-      ) {
+      if (!data.currentMedicalInfo) {
         throw new ZodError([
           {
             code: z.ZodIssueCode.custom,
             message: "Please provide information",
-            path: ["currentMedicalInfo", "otherMedicalInfo"],
+            path: ["currentMedicalInfo"],
           },
         ]);
       }
     }
+
     if (data.hadMedicalCondition) {
-      if (
-        !data.previousMedicalInfo ||
-        data.previousMedicalInfo === "others" ||
-        !data.otherPreviousMedicalInfo
-      ) {
+      if (!data.previousMedicalInfo) {
         throw new ZodError([
           {
             code: z.ZodIssueCode.custom,
             message: "Please provide information",
-            path: ["previousMedicalInfo", "otherPreviousMedicalInfo"],
+            path: ["previousMedicalInfo"],
           },
         ]);
       }
     }
+
     if (data.takingMedication) {
       if (!data.howLongMedication) {
         throw new ZodError([
@@ -92,6 +87,7 @@ const diseases = [
 ];
 
 export default function MedicalDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof MedicalScema>>({
     resolver: zodResolver(MedicalScema),
     defaultValues: {
@@ -102,8 +98,8 @@ export default function MedicalDetails() {
   });
 
   function onSubmit(values: z.infer<typeof MedicalScema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/plus-form/spiritual");
   }
 
   return (

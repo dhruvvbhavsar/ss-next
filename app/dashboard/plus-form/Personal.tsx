@@ -26,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 const personalSchema = z
   .object({
     currentCountry: z.string({ required_error: "Please select a country" }),
@@ -233,6 +234,7 @@ const personalSchema = z
   });
 
 export default function PersonalDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof personalSchema>>({
     resolver: zodResolver(personalSchema),
     defaultValues: {
@@ -245,8 +247,8 @@ export default function PersonalDetails() {
   });
 
   function onSubmit(values: z.infer<typeof personalSchema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/plus-form/medical");
   }
   return (
     <Form {...form}>

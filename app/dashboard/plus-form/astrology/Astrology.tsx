@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { rashi } from "@/options";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const astrologySchema = z
   .object({
@@ -56,13 +57,14 @@ const astrologySchema = z
   });
 
 export default function AstrologyDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof astrologySchema>>({
     resolver: zodResolver(astrologySchema),
   });
 
   function onSubmit(values: z.infer<typeof astrologySchema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/");
   }
 
   return (

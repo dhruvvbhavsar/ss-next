@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const familySchema = z
   .object({
@@ -132,13 +133,14 @@ const familySchema = z
   });
 
 export default function FamilyDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof familySchema>>({
     resolver: zodResolver(familySchema),
   });
 
   function onSubmit(values: z.infer<typeof familySchema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/plus-form/preferences");
   }
 
   return (

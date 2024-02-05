@@ -24,6 +24,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { books, initiatingGurus, orgList } from "@/options";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 const spiritualSchema = z
   .object({
     isAffiliated: z.boolean(),
@@ -425,6 +426,7 @@ const spiritualSchema = z
   });
 
 export default function SpiritualDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof spiritualSchema>>({
     resolver: zodResolver(spiritualSchema),
     defaultValues: {
@@ -436,8 +438,8 @@ export default function SpiritualDetails() {
   });
 
   function onSubmit(values: z.infer<typeof spiritualSchema>) {
-    console.log(values);
     toast.success("Saved");
+    router.push("/dashboard/plus-form/lifestyle");
   }
   return (
     <Form {...form}>

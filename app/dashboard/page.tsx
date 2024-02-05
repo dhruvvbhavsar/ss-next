@@ -13,8 +13,10 @@ import {
 import prisma from "@/lib/prisma";
 import logo from "@/public/logo.png";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 const Page = async () => {
   const session = await getPageSession();
+  if(!session) redirect("/auth/login");
   let user = session.user;
   let users = await prisma.authUser.findMany({
     where: {
@@ -36,7 +38,7 @@ const Page = async () => {
         </div>
         <p className="text-white text-xl">Welcome back, {user.firstName}!</p>
         <div className="my-auto flex h-3/5 flex-row gap-6 text-white">
-          <div className="my-auto h-10 w-10 rounded-full bg-white">
+          {/* <div className="my-auto h-10 w-10 rounded-full bg-white">
             <a href={`/dashboard/user/${user.userId}`}>
               <img
                 className="h-full w-full rounded-full object-cover"
@@ -44,7 +46,7 @@ const Page = async () => {
                 alt=""
               />
             </a>
-          </div>
+          </div> */}
           <form method="post" action="/api/auth/logout">
             <button
               type="submit"
@@ -110,7 +112,7 @@ const AlertComplete = ({
         <AlertDialogFooter>
           <AlertDialogCancel>Skip</AlertDialogCancel>
           <AlertDialogAction>
-            <Link href="/User/detailed-registration-page">Okay</Link>
+            <Link href="/dashboard/plus-form">Okay</Link>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
