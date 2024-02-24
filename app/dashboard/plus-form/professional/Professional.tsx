@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { careers } from "@/options";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails } from "../actions";
 
 const professionalSchema = z.object({
   profession: z.string({ required_error: "Professional is required" }),
@@ -37,9 +38,15 @@ export default function ProfessionalDetails() {
     resolver: zodResolver(professionalSchema),
   });
 
-  function onSubmit(values: z.infer<typeof professionalSchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/education");
+  async function onSubmit(values: z.infer<typeof professionalSchema>) {
+    let res = await updateDetails("professional_details", values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/education");
+    } else {
+      toast.error("Error");
+    }
   }
 
   return (

@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails } from "../actions";
 
 const MedicalScema = z
   .object({
@@ -97,9 +98,16 @@ export default function MedicalDetails() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof MedicalScema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/spiritual");
+  async function onSubmit(values: z.infer<typeof MedicalScema>) {
+    let res = await updateDetails("medical_details",values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/spiritual");
+    } else {
+      toast.error("Error");
+    }
+
   }
 
   return (

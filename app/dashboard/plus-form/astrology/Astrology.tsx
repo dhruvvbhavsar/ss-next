@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { rashi } from "@/options";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { markProfileComplete, updateDetails } from "../actions";
 
 const astrologySchema = z
   .object({
@@ -62,9 +63,16 @@ export default function AstrologyDetails() {
     resolver: zodResolver(astrologySchema),
   });
 
-  function onSubmit(values: z.infer<typeof astrologySchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/");
+  async function onSubmit(values: z.infer<typeof astrologySchema>) {
+    let res = await updateDetails("astrology_details", values);
+
+    if (res) {
+      toast.success("Saved");
+      markProfileComplete();
+      router.push("/dashboard/");
+    } else {
+      toast.error("Error");
+    }
   }
 
   return (

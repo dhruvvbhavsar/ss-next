@@ -1,6 +1,5 @@
 "use client";
 import logo from "@/public/logo.png";
-import header from "@/public/header.jpg";
 import React from "react";
 import { ChevronDownCircle, Menu, X } from "lucide-react";
 
@@ -94,7 +93,7 @@ const Hero = () => {
               </h1>
 
               <p
-                className="mt-6 text-4xl leading-5 text-white"
+                className="mt-6 text-lg sm:text-2xl leading-5 text-white"
                 id="sub-heading"
               >
                 Uniting Hearts, With Purpose

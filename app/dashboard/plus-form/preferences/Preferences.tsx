@@ -36,6 +36,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails } from "../actions";
 
 const partnerPreferencesSchema = z
   .object({
@@ -167,9 +168,15 @@ export default function PartnerPreferences() {
     resolver: zodResolver(partnerPreferencesSchema),
   });
 
-  function onSubmit(values: z.infer<typeof partnerPreferencesSchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/astrology");
+  async function onSubmit(values: z.infer<typeof partnerPreferencesSchema>) {
+    let res = await updateDetails("partner_preferences", values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/astrology");
+    } else {
+      toast.error("Error");
+    }
   }
 
   return (

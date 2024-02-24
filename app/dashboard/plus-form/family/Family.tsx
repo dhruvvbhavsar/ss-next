@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails } from "../actions";
 
 const familySchema = z
   .object({
@@ -138,9 +139,15 @@ export default function FamilyDetails() {
     resolver: zodResolver(familySchema),
   });
 
-  function onSubmit(values: z.infer<typeof familySchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/preferences");
+  async function onSubmit(values: z.infer<typeof familySchema>) {
+    let res = await updateDetails("family_details", values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/preferences");
+    } else {
+      toast.error("Error");
+    }
   }
 
   return (

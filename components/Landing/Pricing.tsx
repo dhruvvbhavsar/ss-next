@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
 import {
-  CardTitle,
-  CardHeader,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  Card,
-} from "@/components/ui/card";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { CheckIcon } from "lucide-react";
+import Image from "next/image";
+import qr from '@/public/qr2.png'
 
 export default function Pricing() {
   return (
@@ -36,14 +39,14 @@ export default function Pricing() {
           <div className="flex flex-col items-center ml-6">
             <div className="text-6xl font-bold mb-2">₹500</div>
             <div className="text-gray-600 mb-4">Billed Yearly</div>
-            <Button>Get Started</Button>
+            <QR />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <h2 className="col-span-full text-2xl font-bold mb-4">Add ons</h2>
-          {data.astro.map((a,i) => {
+          {data.astro.map((a, i) => {
             return (
-                <Card key={i} className="w-full">
+              <Card key={i} className="w-full">
                 <CardHeader>
                   <CardTitle>{a.name}</CardTitle>
                 </CardHeader>
@@ -53,18 +56,16 @@ export default function Pricing() {
                     className="  object-contain h-48 object-center w-full  mb-4"
                     src={a.url}
                   />
-                  <CardDescription>
-                    {a.description}
-                  </CardDescription>
+                  <CardDescription>{a.description}</CardDescription>
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <span className="text-xl font-semibold">₹500</span>
                   <Button>Buy</Button>
                 </CardFooter>
               </Card>
-            )
-          })}   
-        </div>
+            );
+          })}
+        </div> */}
       </div>
     </div>
   );
@@ -72,12 +73,11 @@ export default function Pricing() {
 
 const data = {
   pro: [
-    "Unlimited Posts",
-    "Unlimited Users",
-    "Custom domain",
-    "Dashboard Analytics",
-    "Access to Discord",
-    "Premium Support",
+    "Verified Profiles",
+    "Recommended Matches",
+    "AI Based Match Making",
+    "Unlimited Connect Requests",
+    "Access too  all profiles",
   ],
   astro: [
     {
@@ -98,11 +98,25 @@ const data = {
       description:
         "Guru Bhaskar, a Vastu and Jyotish expert, combines the principles of Vedic astrology with spatial energies. His holistic approach aims at creating balance and positive vibrations in personal and living spaces.",
     },
-    {
-        name: "Guru Bhaskar",
-        url: "https://img.etimg.com/thumb/msid-93827549,width-1200,height-900,imgsize-45932,resizemode-8,quality-100/news/india/the-humble-astrologer-has-gone-online-and-is-thriving.jpg",
-        description:
-          "Guru Bhaskar, a Vastu and Jyotish expert, combines the principles of Vedic astrology with spatial energies. His holistic approach aims at creating balance and positive vibrations in personal and living spaces.",
-      },
   ],
+};
+
+const QR = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Get Started</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Payment Details</DialogTitle>
+          <DialogDescription>
+            Hey, We are still under development. Please call us at +91 97707 78121 to get started.
+            You can scan this QR code to make the payment.
+          </DialogDescription>
+        </DialogHeader>
+        <Image className="mx-auto" src={qr.src} quality={100} alt="QR Code" width={300} height={400} />
+      </DialogContent>
+    </Dialog>
+  );
 };

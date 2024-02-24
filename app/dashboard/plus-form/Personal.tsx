@@ -27,6 +27,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails} from "./actions";
 const personalSchema = z
   .object({
     currentCountry: z.string({ required_error: "Please select a country" }),
@@ -246,9 +247,15 @@ export default function PersonalDetails() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof personalSchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/medical");
+  async function onSubmit(values: z.infer<typeof personalSchema>) {
+    let res = await updateDetails("personal_details",values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/medical");
+    } else {
+      toast.error("Error");
+    }
   }
   return (
     <Form {...form}>

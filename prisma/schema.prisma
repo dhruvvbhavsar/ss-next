@@ -3,9 +3,10 @@ generator client {
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+    provider  = "postgresql"
+    // url      = "postgresql://postgres:bhavsar7@localhost:5432/shubhsambandh?schema=public"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model AuthUser {
@@ -16,7 +17,7 @@ model AuthUser {
     caste             String
     dateOfBirth       DateTime
     timeOfBirth       String
-    state             String        
+    state             String
     city              String
     country           String
     maritalStatus     String
@@ -80,17 +81,16 @@ model AuthKey {
 }
 
 model details {
-    id                   String   @id @unique @default(uuid())
-    userId               String
-    personal_details     Json
-    medical_details      Json
-    spiritual_details    Json
-    lifestyle_details    Json
-    educational_details  Json
-    professional_details Json
-    family_details       Json
-    partner_preferences  Json
-    astrology_details    Json
+    userId               String   @id @unique @default(uuid())
+    personal_details     Json?
+    medical_details      Json?
+    spiritual_details    Json?
+    lifestyle_details    Json?
+    educational_details  Json?
+    professional_details Json?
+    family_details       Json?
+    partner_preferences  Json?
+    astrology_details    Json?
     AuthUser             AuthUser @relation(references: [id], fields: [userId], onDelete: Cascade)
 
     @@index([userId])

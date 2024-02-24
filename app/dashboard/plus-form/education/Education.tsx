@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails } from "../actions";
 
 const educationSchema = z
   .object({
@@ -47,9 +48,15 @@ export default function EducationalDetails() {
     resolver: zodResolver(educationSchema),
   });
 
-  function onSubmit(values: z.infer<typeof educationSchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/family");
+  async function onSubmit(values: z.infer<typeof educationSchema>) {
+    let res = await updateDetails("educational_details",values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/family");
+    } else {
+      toast.error("Error");
+    }
   }
 
   return (

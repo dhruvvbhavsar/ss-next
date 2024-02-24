@@ -14,16 +14,18 @@ import prisma from "@/lib/prisma";
 import logo from "@/public/logo.png";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Bookmark } from "lucide-react";
+import Bookmarks from "./Bookmarks";
 const Page = async () => {
   const session = await getPageSession();
-  if(!session) redirect("/auth/login");
+  if (!session) redirect("/auth/login");
   let user = session.user;
   let users = await prisma.authUser.findMany({
-    where: {
-      NOT: {
-        id: user.userId,
-      },
-    },
+    // where: {
+    //   NOT: {
+    //     id: user.userId,
+    //   },
+    // },
   });
   return (
     <div>
@@ -36,9 +38,10 @@ const Page = async () => {
         <div className="my-auto pl-8">
           <img src={logo.src} width="60px" alt="" />
         </div>
-        <p className="text-white text-xl">Welcome back, {user.firstName}!</p>
-        <div className="my-auto flex h-3/5 flex-row gap-6 text-white">
-          {/* <div className="my-auto h-10 w-10 rounded-full bg-white">
+        <p className="text-white text-center text-xs sm:text-xl">Welcome back, {user.firstName}!</p>
+        <div className="items-center flex h-3/5 flex-row gap-6 text-white">
+          <Bookmarks />
+          <div className="my-auto h-10 w-10 rounded-full bg-white">
             <a href={`/dashboard/user/${user.userId}`}>
               <img
                 className="h-full w-full rounded-full object-cover"
@@ -46,7 +49,7 @@ const Page = async () => {
                 alt=""
               />
             </a>
-          </div> */}
+          </div>
           <form method="post" action="/api/auth/logout">
             <button
               type="submit"

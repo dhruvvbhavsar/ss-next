@@ -1,4 +1,4 @@
-import couple from '@/public/happy-couple.jpg'
+import couple from '@/public/happy-couple.jpeg'
 
 const Blog = () => {
   return (

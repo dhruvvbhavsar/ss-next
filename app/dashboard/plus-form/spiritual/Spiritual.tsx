@@ -25,6 +25,7 @@ import { books, initiatingGurus, orgList } from "@/options";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { updateDetails } from "../actions";
 const spiritualSchema = z
   .object({
     isAffiliated: z.boolean(),
@@ -437,9 +438,15 @@ export default function SpiritualDetails() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof spiritualSchema>) {
-    toast.success("Saved");
-    router.push("/dashboard/plus-form/lifestyle");
+  async function onSubmit(values: z.infer<typeof spiritualSchema>) {
+    let res = await updateDetails("spiritual_details", values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/lifestyle");
+    } else {
+      toast.error("Error");
+    }
   }
   return (
     <Form {...form}>

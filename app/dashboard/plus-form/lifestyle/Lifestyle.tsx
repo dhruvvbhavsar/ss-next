@@ -24,6 +24,8 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { hobbies, sportslist } from "@/options";
 import { toast } from "sonner";
+import { updateDetails } from "../actions";
+import { useRouter } from "next/navigation";
 
 const lifestyleSchema = z
   .object({
@@ -47,7 +49,7 @@ const lifestyleSchema = z
     otherAfterMarriagePlans: z.string().optional(),
   })
   .refine((data) => {
-    if (data.doYouExercise && !data.otherExercise) {
+    if (data.doYouExercise && data.doYouExercise === "others" && !data.otherExercise) {
       throw new ZodError([
         {
           code: z.ZodIssueCode.custom,
@@ -56,7 +58,7 @@ const lifestyleSchema = z
         },
       ]);
     }
-
+  
     if (data.whoDoYouLiveWith === "others" && !data.othersWhoLiveWith) {
       throw new ZodError([
         {
@@ -66,7 +68,7 @@ const lifestyleSchema = z
         },
       ]);
     }
-
+  
     if (data.afterMarriagePlans === "others" && !data.otherAfterMarriagePlans) {
       throw new ZodError([
         {
@@ -78,20 +80,33 @@ const lifestyleSchema = z
     }
     return true;
   });
+  
+
 
 export default function LifestyleDetails() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof lifestyleSchema>>({
     resolver: zodResolver(lifestyleSchema),
   });
 
-  function onSubmit(values: z.infer<typeof lifestyleSchema>) {
-    console.log(values);
-    toast.success("Saved");
+  async function onSubmit(values: z.infer<typeof lifestyleSchema>) {
+    let res = await updateDetails("lifestyle_details", values);
+
+    if (res) {
+      toast.success("Saved");
+      router.push("/dashboard/plus-form/professional");
+    } else {
+      toast.error("Error");
+    }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(() => {
+        //strict parse the values
+        lifestyleSchema.parse(form.getValues());
+        onSubmit(form.getValues());
+      })} className="space-y-8">
         <FormField
           control={form.control}
           name="sports"
