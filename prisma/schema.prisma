@@ -3,10 +3,11 @@ generator client {
 }
 
 datasource db {
-    provider  = "postgresql"
+    provider = "postgresql"
     // url      = "postgresql://postgres:bhavsar7@localhost:5432/shubhsambandh?schema=public"
-    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+    // url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+    url      = "postgresql://postgres:N7gGXS2fl9831VbgSCot@shubhsambandh.cnsoug0w85d3.ap-south-1.rds.amazonaws.com:5432/shubhsambandh"
 }
 
 model AuthUser {

@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { readFileSync } from "fs";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
@@ -7,7 +7,7 @@ export default async function RemoteMdxPage({
 }: {
   params: { slug: string };
 }) {
-  const res = await readFile(`./public/links/${params.slug}.mdx`, "utf8");
+  const res = readFileSync(`data/links/${params.slug}.md`, "utf8");
   const { data, content } = matter(res);
   return (
     <>
