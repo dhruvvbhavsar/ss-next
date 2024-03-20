@@ -26,7 +26,7 @@ const Hero = () => {
               open
                 ? "translate-x-0 opacity-100 "
                 : "opacity-0 -translate-x-full"
-            } absolute inset-x-0 z-30 px-4 py-8 mt-4 space-y-6 transition-all duration-300 ease-in-out bg-red-900 rounded-md top-16 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:space-y-0 md:-mx-6 md:flex md:items-center`}
+            } absolute font-mono font-black inset-x-0 z-30 px-4 py-8 mt-4 space-y-6 transition-all duration-300 ease-in-out bg-red-900 rounded-md top-16 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:space-y-0 md:-mx-6 md:flex md:items-center`}
           >
             <a
               href="/"
@@ -70,7 +70,7 @@ const Hero = () => {
             >
               FAQs
             </a>
-            <a
+            {/* <a
               href="/auth/login"
               className="block text-white transition-colors duration-300 md:px-6 hover:text-red-300"
             >
@@ -81,7 +81,7 @@ const Hero = () => {
               className="block text-white transition-colors duration-300 md:px-6 hover:text-red-300"
             >
               Register
-            </a>
+            </a> */}
           </div>
         </nav>
 
@@ -99,15 +99,27 @@ const Hero = () => {
                 Uniting Hearts, With Purpose
               </p>
 
-              <a
-                href="/auth/register"
-                className="border-2 text-2xl rounded-lg bg-white mt-8 py-4 w-60"
-              >
-                Get Started
-              </a>
+              <div className="flex gap-2">
+                <a
+                  href="/auth/register"
+                  className="border-2 text-2xl rounded-lg bg-white mt-8 py-2 w-40"
+                >
+                  Register
+                </a>
+
+                <a
+                  href="/auth/login"
+                  className="border-2 text-2xl rounded-lg bg-white mt-8 py-2 w-40"
+                >
+                  Login
+                </a>
+              </div>
 
               <a href="#about">
-                <ChevronDownCircle size={32} className="text-white mt-8 cursor-pointer animate-bounce" />
+                <ChevronDownCircle
+                  size={32}
+                  className="text-white mt-8 cursor-pointer animate-bounce"
+                />
               </a>
             </div>
           </div>

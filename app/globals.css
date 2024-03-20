@@ -64,6 +64,7 @@
   background-image: url('../public/h2.jpeg');
   background-position: bottom;
   background-size: cover;
+  filter: brightness(0.9);
 }
 
 .login {

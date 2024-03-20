@@ -17,14 +17,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 const Page = () => {
   const router = useRouter()
+  const [loading, setLoading] = React.useState<boolean>(false);
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
   });
 
   async function handleSubmit(values: z.infer<typeof loginSchema>) {
+    setLoading(true);
     let res = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify(values)
@@ -35,8 +38,9 @@ const Page = () => {
         message: "Incorrect email or password."
       })
     } else {
-      router.refresh()
+      router.push("/dashboard")
     }
+    setLoading(false);
   }
 
   return (
@@ -101,7 +105,7 @@ const Page = () => {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit">Submit</Button>
+                  <Button disabled={loading} type="submit">{loading ? "loading" : "Submit"}</Button>
                 </form>
               </Form>
 

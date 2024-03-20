@@ -8,14 +8,14 @@ import Pricing from "@/components/Landing/Pricing";
 
 const Page = () => {
   return (
-    <>
+    <div className="bg-red-900">
     <Hero />
 	  <About />
 	  <Features />
 	  <Blog />
 	  <FAQ />
 	  <Footer />
-    </>
+    </div>
   );
 };
 

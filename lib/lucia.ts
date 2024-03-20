@@ -27,6 +27,7 @@ export const auth = lucia({
       profilePictureUrl: data.profilePictureUrl,
       firstName: data.firstName,
       lastName: data.lastName,
+      mobile: data.mobileNumber,
       isPaid: data.isPaid,
       isProfileComplete: data.isProfileComplete
     };

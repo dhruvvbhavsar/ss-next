@@ -16,6 +16,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Bookmark } from "lucide-react";
 import Bookmarks from "./Bookmarks";
+import { Suspense } from "react";
 const Page = async () => {
   const session = await getPageSession();
   if (!session) redirect("/auth/login");
@@ -28,7 +29,7 @@ const Page = async () => {
     // },
   });
   return (
-    <div>
+    <Suspense fallback={<p>loading...</p>}>
       <AlertDial isPaid={user.isPaid} />
       <AlertComplete
         isPaid={user.isPaid}
@@ -66,7 +67,7 @@ const Page = async () => {
           return <Profile key={i} user={u} />;
         })}
       </div>
-    </div>
+    </Suspense>
   );
 };
 

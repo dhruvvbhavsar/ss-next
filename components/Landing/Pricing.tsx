@@ -1,18 +1,12 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-
 import { CheckIcon } from "lucide-react";
-import Image from "next/image";
-import qr from '@/public/qr2.png'
+import { QR } from "./Payment";
+import { getPageSession } from "@/lib/lucia";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
-export default function Pricing() {
+export default async function Pricing() {
+  let session = await getPageSession();
+  const { firstName, lastName, email, mobile } = session.user;
   return (
     <div key="1" className="text-white py-12 px-4 bg-red-900">
       <div className="max-w-4xl mx-auto">
@@ -39,7 +33,22 @@ export default function Pricing() {
           <div className="flex flex-col items-center ml-6">
             <div className="text-6xl font-bold mb-2">₹500</div>
             <div className="text-gray-600 mb-4">Billed Yearly</div>
-            <QR />
+            {session.user.isPaid && (
+              <Link
+                href="/dashboard"
+                className="bg-red-900 text-white p-2 rounded-sm"
+              >
+                Subscribed!
+              </Link>
+            )}
+            {!session && (
+              <Link href="/auth/login">
+                <Button>Get Started</Button>
+              </Link>
+            )}
+            {session && !session.user.isPaid && (
+              <QR email={email} name={firstName+ ' ' + lastName} mobile={mobile} />
+            )}
           </div>
         </div>
         {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -99,24 +108,4 @@ const data = {
         "Guru Bhaskar, a Vastu and Jyotish expert, combines the principles of Vedic astrology with spatial energies. His holistic approach aims at creating balance and positive vibrations in personal and living spaces.",
     },
   ],
-};
-
-const QR = () => {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Get Started</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Payment Details</DialogTitle>
-          <DialogDescription>
-            Hey, We are still under development. Please call us at +91 97707 78121 to get started.
-            You can scan this QR code to make the payment.
-          </DialogDescription>
-        </DialogHeader>
-        <Image className="mx-auto" src={qr.src} quality={100} alt="QR Code" width={300} height={400} />
-      </DialogContent>
-    </Dialog>
-  );
 };

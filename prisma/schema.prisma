@@ -5,9 +5,7 @@ generator client {
 datasource db {
     provider = "postgresql"
     // url      = "postgresql://postgres:bhavsar7@localhost:5432/shubhsambandh?schema=public"
-    // url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-    // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-    url      = env("POSTGRES_PRISMA_URL")
+    url       = env("POSTGRES_PRISMA_URL")
     directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
@@ -30,11 +28,26 @@ model AuthUser {
     isProfileComplete Boolean       @default(false)
     auth_session      AuthSession[]
     auth_key          AuthKey[]
+    expires           DateTime?
     Bookmark          Bookmark[]
     Connection        Connection[]
     details           details[]
+    payments          payments[]
 
     @@map("auth_user")
+}
+
+model payments {
+    id        String   @id @unique
+    userId    String
+    orderId   String
+    signature String
+    amount    Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    user      AuthUser @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model Connection {
