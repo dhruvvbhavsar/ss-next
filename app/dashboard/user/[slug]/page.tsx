@@ -73,7 +73,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             />
           </div>
         </section>
-        <section className="h-screen w-full bg-orange-200 text-blue-950 p-8">
+        <section className="w-full bg-orange-200 text-blue-950 p-8">
           <div className="mb-4 text-2xl font-semibold ">Basic Information</div>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
@@ -120,7 +120,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </Button>
         )}
       </main>
-      {isPaid && <PaidDetails />}
+      {isPaid && <PaidDetails id={params.slug} />}
     </Suspense>
   );
 }

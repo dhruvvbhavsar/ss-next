@@ -4,9 +4,9 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    // url      = "postgresql://postgres:bhavsar7@localhost:5432/shubhsambandh?schema=public"
-    url       = env("POSTGRES_PRISMA_URL")
-    directUrl = env("POSTGRES_URL_NON_POOLING")
+    url      = "postgresql://postgres:bhavsar7@localhost:5432/shubhsambandh?schema=public"
+    // url       = env("POSTGRES_PRISMA_URL")
+    // directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model AuthUser {

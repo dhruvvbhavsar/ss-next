@@ -4,7 +4,6 @@ import { getPageSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
 
 export async function updateDetails(detailType: string, values: any) {
-  console.log("detailType", detailType);
   const session = await getPageSession();
   const userId = session.user.userId;
   const x = await prisma.details.findMany({
