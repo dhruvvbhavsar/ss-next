@@ -24,7 +24,7 @@ const PaidDetails = async () => {
     },
   });
 
-  if (!details) return <p>Not found</p>;
+  if (!details) return;
 
   return (
     <div className="mx-auto bg-orange-200 text-blue-950 px-4">

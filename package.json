@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@icons-pack/react-simple-icons": "^9.4.0",
     "@lucia-auth/adapter-prisma": "^3.0.2",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",

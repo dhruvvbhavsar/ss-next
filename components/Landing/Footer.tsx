@@ -1,4 +1,6 @@
 import logo from "@/public/logo.png";
+import { Home, Mail, PhoneCall } from "lucide-react";
+import { SiWhatsapp } from "@icons-pack/react-simple-icons";
 
 const Footer = () => {
   return (
@@ -110,21 +112,35 @@ const Footer = () => {
             <p className="font-semibold text-white">Contact Us</p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <p
-                className=" transition-colors duration-300 text-white "
-              >
-                +91 97707 78121
-              </p>
-              <p
-                className=" transition-colors duration-300 text-white "
-              >
-                shubhsambandh108@gmail.com
-              </p>
-              <pre className="transition-colors duration-300 text-white whitespace-pre-line">
-  49/B2, Bombay Cotton Mills, Dattaram Lad Marg, Kalachowki,
-  Mumbai: 400033, Maharashtra, India
-</pre>
-
+              <div>
+                <p className="text-white flex gap-1 items-center">
+                  <span>Contact Number</span>
+                  <PhoneCall size={14} />
+                  <SiWhatsapp size={14} />
+                </p>
+                <p className=" transition-colors duration-300 text-white/80 ">
+                  +91 9324258593
+                </p>
+              </div>
+              <div>
+                <p className="text-white flex gap-1 items-center">
+                  <span>Email</span>
+                  <Mail size={14} />
+                </p>
+                <p className=" transition-colors duration-300 text-white/80 ">
+                  care@shubhsambandh.com
+                </p>
+              </div>
+              <div>
+                <p className="text-white flex gap-1 items-center">
+                  <span>Registered Office</span>
+                  <Home size={14} />
+                </p>
+                <pre className="transition-colors duration-300 text-white/80 whitespace-pre-line">
+                  49/B2, Bombay Cotton Mills, Dattaram Lad Marg, Kalachowki,
+                  Mumbai: 400033, Maharashtra, India
+                </pre>
+              </div>
             </div>
           </div>
         </div>

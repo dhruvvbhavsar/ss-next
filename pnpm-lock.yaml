@@ -8,6 +8,9 @@ dependencies:
   '@hookform/resolvers':
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.50.1)
+  '@icons-pack/react-simple-icons':
+    specifier: ^9.4.0
+    version: 9.4.0(react@18.2.0)
   '@lucia-auth/adapter-prisma':
     specifier: ^3.0.2
     version: 3.0.2(@prisma/client@5.10.1)(lucia@2.7.7)
@@ -267,6 +270,14 @@ packages:
   /@humanwhocodes/object-schema@2.0.2:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
+
+  /@icons-pack/react-simple-icons@9.4.0(react@18.2.0):
+    resolution: {integrity: sha512-fZtC4Zv53hE+IQE2dJlFt3EB6UOifwTrUNMuEu4hSXemtqMahd05Dpvj2K0j2ewVc+j/ibavud3xjfaMB2Nj7g==}
+    peerDependencies:
+      react: ^16.13 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@isaacs/cliui@8.0.2:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}

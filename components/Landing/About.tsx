@@ -13,9 +13,9 @@ const About = () => {
 
           <p className="mt-6 text-white">
             Welcome to ShubhSambandh, where we bring together individuals who
-            share the same values and beliefs. Our mission is{" "}
+            share the same values and beliefs. Our mission is to{" "}
             <span className="text-xl italic font-bold">
-              Uniting Hearts in Love{" "}
+              unite hearts with purpose{" "}
             </span>
             and creating long-lasting, meaningful relationships. At our marriage
             website, we stand out because we focus on sincere connections based

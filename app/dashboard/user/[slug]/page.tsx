@@ -3,6 +3,9 @@ import prisma from "@/lib/prisma";
 import Like from "./LikeButton";
 import Connect from "./ConnectButton";
 import PaidDetails from "./PaidDetails";
+import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
+import Link from "next/link";
 export default async function Page({ params }: { params: { slug: string } }) {
   let session = await getPageSession();
   let myId = session.user.userId;
@@ -31,8 +34,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   let isConnected = connect ? true : false;
 
   return (
-    <>
-      <main className="flex flex-col sm:flex-row">
+    <Suspense fallback={<p>loading...</p>}>
+      <main className="flex flex-col sm:flex-row relative">
         <section className="relative flex h-screen w-full flex-col items-center justify-center bg-white">
           <div className="relative flex h-48 w-48 items-center justify-center rounded-2xl bg-gray-300">
             <div
@@ -71,9 +74,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         </section>
         <section className="h-screen w-full bg-orange-200 text-blue-950 p-8">
-          <div className="mb-4 text-2xl font-semibold ">
-            Basic Information
-          </div>
+          <div className="mb-4 text-2xl font-semibold ">Basic Information</div>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
               <span className="font-bold">First Name</span>
@@ -113,8 +114,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div> */}
           </div>
         </section>
+        {!isPaid && (
+          <Button asChild className="absolute bottom-4 right-4">
+            <Link href="/pricing">Get Premuim</Link>
+          </Button>
+        )}
       </main>
       {isPaid && <PaidDetails />}
-    </>
+    </Suspense>
   );
 }

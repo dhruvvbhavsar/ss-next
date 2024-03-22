@@ -17,6 +17,7 @@ import { redirect } from "next/navigation";
 import { Bookmark } from "lucide-react";
 import Bookmarks from "./Bookmarks";
 import { Suspense } from "react";
+import { Button } from "@/components/ui/button";
 const Page = async () => {
   const session = await getPageSession();
   if (!session) redirect("/auth/login");
@@ -39,7 +40,9 @@ const Page = async () => {
         <div className="my-auto pl-8">
           <img src={logo.src} width="60px" alt="" />
         </div>
-        <p className="text-white text-center text-xs sm:text-xl">Welcome back, {user.firstName}!</p>
+        <p className="text-white text-center text-xs sm:text-xl">
+          Welcome back, {user.firstName}!
+        </p>
         <div className="items-center flex h-3/5 flex-row gap-6 text-white">
           <Bookmarks />
           <div className="my-auto h-10 w-10 rounded-full bg-white">
@@ -87,8 +90,10 @@ const AlertDial = ({ isPaid }: { isPaid: boolean }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Skip</AlertDialogCancel>
-          <AlertDialogAction>
-            <Link href="/pricing">Okay</Link>
+          <AlertDialogAction asChild>
+            <Link href="/pricing">
+              <Button>Get Premium</Button>
+            </Link>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -115,8 +120,10 @@ const AlertComplete = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Skip</AlertDialogCancel>
-          <AlertDialogAction>
-            <Link href="/dashboard/plus-form">Okay</Link>
+          <AlertDialogAction asChild>
+            <Link href="/dashboard/plus-form">
+              <Button>Complete Profile</Button>
+            </Link>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

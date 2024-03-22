@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import logo from "@/public/logo.png";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Image from 'next/image'
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const Page = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [loading, setLoading] = React.useState<boolean>(false);
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -30,17 +30,17 @@ const Page = () => {
     setLoading(true);
     let res = await fetch("/api/auth/login", {
       method: "POST",
-      body: JSON.stringify(values)
-    })
+      body: JSON.stringify(values),
+    });
 
-    if(!res.ok) {
+    if (!res.ok) {
       form.setError("root", {
-        message: "Incorrect email or password."
-      })
+        message: "Incorrect email or password.",
+      });
+      setLoading(false);
     } else {
-      router.push("/dashboard")
+      router.push("/dashboard");
     }
-    setLoading(false);
   }
 
   return (
@@ -68,57 +68,75 @@ const Page = () => {
             <div className="text-center">
               <div className="flex justify-center mx-auto">
                 <a href="/">
-                  <Image src={logo.src} alt={"picture"} width={80} height={80}  />
+                  <Image
+                    src={logo.src}
+                    alt={"picture"}
+                    width={80}
+                    height={80}
+                  />
                 </a>
               </div>
 
               <p className="mt-3 ">Sign in to access your account</p>
             </div>
 
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-2">
-                  {form.formState.errors.root && <p className="text-sm text-center font-medium text-destructive">{form.formState.errors.root.message}</p>}
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="kiran@gmail.com" className="text-black" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="space-y-2"
+              >
+                {form.formState.errors.root && (
+                  <p className="text-sm text-center font-medium text-destructive">
+                    {form.formState.errors.root.message}
+                  </p>
+                )}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input className="text-black" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input placeholder="********" className="text-black" type="password" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button disabled={loading} type="submit">{loading ? "loading" : "Submit"}</Button>
-                </form>
-              </Form>
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black"
+                          type="password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button disabled={loading} type="submit">
+                  {loading ? "loading" : "Submit"}
+                </Button>
+              </form>
+            </Form>
 
-              <p className="mt-6 text-sm text-center ">
-                Dont have an account yet?{" "}
-                <a
-                  href="/auth/register"
-                  className="text-red-500 focus:outline-none focus:underline hover:underline"
-                >
-                  Sign up
-                </a>
-                .
-              </p>
+            <p className="mt-6 text-sm text-center ">
+              Dont have an account yet?{" "}
+              <a
+                href="/auth/register"
+                className="text-red-500 focus:outline-none focus:underline hover:underline"
+              >
+                Sign up
+              </a>
+              .
+            </p>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   experimental: {
     mdxRs: true,
+    ppr: true,
   },
   // Optionally, add any other Next.js config below
 }

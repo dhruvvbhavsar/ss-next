@@ -10,15 +10,14 @@ const FAQ = () => {
   return (
     <section className="bg-red-900" id="faqs">
       <div className="container px-6 py-12 mx-auto">
-        <h1 className="text-2xl font-semibold lg:text-3xl text-white">
-          FAQs
-        </h1>
+        <h1 className="text-2xl font-semibold lg:text-3xl text-white">FAQs</h1>
         <Accordion type="single" collapsible className="w-full mt-4">
           {faq.map((f) => {
             return (
               <AccordionItem key={f.question} value={f.question}>
-                <AccordionTrigger className="text-xl font-semibold text-white">
-                {f.question}</AccordionTrigger>
+                <AccordionTrigger className="text-xl text-left font-semibold text-white">
+                  {f.question}
+                </AccordionTrigger>
                 <AccordionContent className="text-lg text-white">
                   {f.answer}
                 </AccordionContent>
