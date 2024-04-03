@@ -37,7 +37,7 @@
     "gray-matter": "^4.0.3",
     "lucia": "^2.7.7",
     "lucide-react": "^0.306.0",
-    "next": "14.2.0-canary.37",
+    "next": "^14.1.4",
     "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
     "prisma": "^5.10.1",
@@ -47,7 +47,6 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
     "sonner": "^1.4.0",
-    "stripe": "^14.17.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"

@@ -6,7 +6,13 @@ import { Button } from "../ui/button";
 
 export default async function Pricing() {
   let session = await getPageSession();
-  const { firstName, lastName, email, mobile } = session.user;
+  let firstName, lastName, email, mobile;
+  if (session) {
+    firstName = session.user.firstName;
+    lastName = session.user.lastName;
+    email = session.user.email;
+    mobile = session.user.mobile;
+  }
   return (
     <div key="1" className="text-white py-12 px-4 bg-red-900">
       <div className="max-w-4xl mx-auto">
@@ -33,7 +39,7 @@ export default async function Pricing() {
           <div className="flex flex-col items-center ml-6">
             <div className="text-6xl font-bold mb-2">₹500</div>
             <div className="text-gray-600 mb-4">Billed Yearly</div>
-            {session.user.isPaid && (
+            {session && session.user.isPaid && (
               <Link
                 href="/dashboard"
                 className="bg-red-900 text-white p-2 rounded-sm"
