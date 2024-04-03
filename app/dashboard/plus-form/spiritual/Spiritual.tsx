@@ -55,6 +55,7 @@ const spiritualSchema = z
     areYouInitiated: z.string().optional(),
     initiatedName: z.string().optional(),
     aspiringToBeInitiatedBy: z.string().optional(),
+    otherAspiringToBeInitiatedBy: z.string().optional(),
     understandBhagwatKnowledge: z.string().optional(),
     doYouReadBooks: z.boolean().optional(),
     readBooks: z.array(z.string()).optional(),
@@ -237,6 +238,18 @@ const spiritualSchema = z
               path: ["aspiringToBeInitiatedBy"],
             },
           ]);
+        }
+
+        if (data.aspiringToBeInitiatedBy === "others") {
+          if (!data.otherAspiringToBeInitiatedBy) {
+            throw new ZodError([
+              {
+                code: z.ZodIssueCode.custom,
+                message: "Please specify the other aspiring guru",
+                path: ["otherAspiringToBeInitiatedBy"],
+              },
+            ]);
+          }
         }
       }
 
@@ -929,10 +942,6 @@ export default function SpiritualDetails() {
                           <SelectItem value="not yet">Not Yet</SelectItem>
                         </SelectContent>
                       </Select>
-
-                      <FormDescription>
-                        Please specify if you are initiated
-                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -945,7 +954,24 @@ export default function SpiritualDetails() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Name of the initiating guru</FormLabel>
-                        <Input {...field} />
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="select option" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {initiatingGurus.map((guru) => (
+                              <SelectItem key={guru} value={guru}>
+                                {guru}
+                              </SelectItem>
+                            ))}
+                            <SelectItem value="others">others</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormDescription>
                           Please specify the name of the initiating guru
                         </FormDescription>
@@ -956,23 +982,59 @@ export default function SpiritualDetails() {
                 )}
 
                 {form.watch("areYouInitiated") === "not yet" && (
-                  <FormField
-                    control={form.control}
-                    name="aspiringToBeInitiatedBy"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Name of the guru you are aspiring to be initiated by
-                        </FormLabel>
-                        <Input {...field} />
-                        <FormDescription>
-                          Please specify the name of the guru you are aspiring
-                          to be initiated by
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="aspiringToBeInitiatedBy"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            Name of the guru you are aspiring to be initiated by
+                          </FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="select option" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {initiatingGurus.map((guru) => (
+                                <SelectItem key={guru} value={guru}>
+                                  {guru}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormDescription>
+                            Please specify the name of the guru you are aspiring
+                            to be initiated by
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    {form.watch("aspiringToBeInitiatedBy") === "others" && (
+                      <FormField
+                        control={form.control}
+                        name="otherAspiringToBeInitiatedBy"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              Please specify the name of the other aspiring guru
+                            </FormLabel>
+                            <Input {...field} />
+                            <FormDescription>
+                              Please specify the name of the other aspiring guru
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     )}
-                  />
+                  </>
                 )}
 
                 <FormField

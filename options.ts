@@ -461,15 +461,15 @@ export const initiatingGurus = [
 ];
 
 export const books = [
-  "Bhagavad-gita As It Is (1972)",
+  "Bhagavad-gita As It Is",
   "Srimad-Bhagavatam",
-  "Sri Caitanya-caritamrta - 1975 Edition",
-  "Teachings of Lord Caitanya - 1968 Edition",
-  "The Nectar of Devotion - 1970 Edition",
+  "Sri Caitanya-caritamrta",
+  "Teachings of Lord Caitanya",
+  "The Nectar of Devotion",
   "The Nectar of Instruction",
-  "Easy Journey to Other Planets - 1972 Edition",
+  "Easy Journey to Other Planets",
   "Krsna Consciousness The Topmost Yoga System",
-  "KRSNA, The Supreme Personality of Godhead - 1970 Edition",
+  "KRSNA, The Supreme Personality of Godhead",
   "Perfect Questions, Perfect Answers",
   "Teachings of Lord Kapila, the Son of Devahuti",
   "Teachings of Queen Kunti",
@@ -484,7 +484,7 @@ export const books = [
   "Elevation to Krsna Consciousness",
   "Krsna Consciousness, The Matchless Gift",
   "Light of the Bhagavata",
-  "Sri Isopanisad - 1974 Edition",
+  "Sri Isopanisad",
   "The Journey of Self - Discovery",
   "Transcendental Teachings of Prahlada Maharaja",
   "A Second Chance: The Story of a Near - Death Experience",
@@ -1071,16 +1071,16 @@ export const education = [
 ];
 
 export const rashi = [
-  'Mesh',
-  'Karka',
-  'Tula',
-  'Makar',
-  'Vrisabh',
-  'Simha',
-  'Vrishchik',
-  'Kumbha',
-  'Mithuna',
-  'Kanya',
-  'Dhanu',
-  'Meen'
+  'Mesh (Aries)',
+  'Karka (Cancer)',
+  'Tula (Libra)',
+  'Makar (Capricorn)',
+  'Vrisabh (Taurus)',
+  'Simha (Leo)',
+  'Vrishchik (Scorpio)',
+  'Kumbha (Aquarius)',
+  'Mithuna (Gemini)',
+  'Kanya (Virgo)',
+  'Dhanu (Sagittarius)',
+  'Meen (Pisces)'
 ];

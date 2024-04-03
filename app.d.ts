@@ -13,7 +13,7 @@ declare namespace Lucia {
     country: string;
     state: string,
     city: string;
-    profilePictureUrl: string;
+    pfpArray: string[];
     dateOfBirth: DateTime;
     timeOfBirth: string;
     isPaid: Boolean;

@@ -4,6 +4,11 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const sidebarNavItems = [
   {
+    title: "Add Pictures",
+    href: "/dashboard/plus-form/pictures",
+  }
+  ,
+  {
     title: "Personal",
     href: "/dashboard/plus-form",
   },

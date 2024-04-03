@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
                 mobileNumber,
                 isPaid: false,
                 isProfileComplete: false,
-                profilePictureUrl: url,
+				pfpArray: [url]
 			}
 		});
 		const session = await auth.createSession({

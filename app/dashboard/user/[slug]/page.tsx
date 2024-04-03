@@ -4,8 +4,11 @@ import Like from "./LikeButton";
 import Connect from "./ConnectButton";
 import PaidDetails from "./PaidDetails";
 import { Button } from "@/components/ui/button";
+import logo from "@/public/logo.png";
 import { Suspense } from "react";
 import Link from "next/link";
+import { ImageCarousel } from "./ImageCarousel";
+import Bookmarks from "../../Bookmarks";
 export default async function Page({ params }: { params: { slug: string } }) {
   let session = await getPageSession();
   let myId = session.user.userId;
@@ -35,21 +38,43 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <Suspense fallback={<p>loading...</p>}>
+      <nav className="flex h-20 flex-row justify-between items-center bg-red-900">
+        <div className="my-auto pl-8">
+          <img src={logo.src} width="60px" alt="" />
+        </div>
+        <p className="text-white text-center text-xs sm:text-xl">
+          Welcome back, {user.firstName}!
+        </p>
+        <div className="items-center flex h-3/5 flex-row gap-6 text-white">
+          <Bookmarks />
+          <div className="my-auto h-10 w-10 rounded-full bg-white">
+            <img
+              className="h-full w-full rounded-full object-cover"
+              src={user.pfpArray[0]}
+              alt=""
+            />
+          </div>
+          <form method="post" action="/api/auth/logout">
+            <button
+              type="submit"
+              className="mb-2 mr-2 rounded-full bg-red-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300"
+            >
+              Sign out
+            </button>
+          </form>
+        </div>
+      </nav>
       <main className="flex flex-col sm:flex-row relative">
         <section className="relative flex h-screen w-full flex-col items-center justify-center bg-white">
           <div className="relative flex h-48 w-48 items-center justify-center rounded-2xl bg-gray-300">
             <div
-              className={`absolute -right-4 -top-4 rounded-full ${
+              className={`absolute z-10 -right-4 -top-4 rounded-full ${
                 user.isPaid ? "bg-amber-600" : "bg-red-900"
               } px-2 py-1 text-xs text-white`}
             >
               {user.isPaid ? "Plus+" : "Basic"}
             </div>
-            <img
-              className="w-full h-full object-cover rounded-2xl object-center"
-              src={user.profilePictureUrl}
-              alt=""
-            />
+            <ImageCarousel urls={user.pfpArray} />
           </div>
 
           <div className="relative mt-1">

@@ -24,12 +24,12 @@ export const auth = lucia({
   getUserAttributes: (data) => {
     return {
       email: data.email,
-      profilePictureUrl: data.profilePictureUrl,
       firstName: data.firstName,
       lastName: data.lastName,
       mobile: data.mobileNumber,
       isPaid: data.isPaid,
-      isProfileComplete: data.isProfileComplete
+      isProfileComplete: data.isProfileComplete,
+      pfpArray: data.pfpArray
     };
   },
 });

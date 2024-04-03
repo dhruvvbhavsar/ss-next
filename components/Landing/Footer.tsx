@@ -13,7 +13,7 @@ const Footer = () => {
 
           <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
             <a
-              href="/Register"
+              href="/auth/register"
               className="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-black duration-300 bg-white rounded-lg gap-x-3 hover:bg-red-700 hover:text-white focus:ring focus:ring-gray-300 focus:ring-opacity-80"
             >
               <span>Sign Up Now</span>

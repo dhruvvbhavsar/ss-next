@@ -21,7 +21,7 @@ export default function Profile({ user }: { user: any }) {
       href={`/dashboard/user/${user.id}`}
       className="overflow-hidden rounded-lg bg-red-300 p-4 shadow-lg"
     >
-      <img className="object-cover object-center max-h-60 w-full" src={user.profilePictureUrl} />
+      <img className="object-cover object-center max-h-60 w-full" src={user.pfpArray[0]} />
 
       <div className="mt-4 flex items-center justify-between">
         <div className="text-sm sm:text-lg font-medium">

@@ -16,7 +16,7 @@ interface RazorpayOptions {
   description: string;
   order_id: string;
   callback_url: string;
-  prefill: {
+  prefill?: {
     name: string;
     email: string;
     contact: string;
@@ -74,11 +74,6 @@ const handleRazorpayPayment = async (
       description: "Shubh Sambandh Premium Plan",
       order_id,
       callback_url: "/api/payment/success",
-      prefill: {
-        name: "Dhruv",
-        email: "dhruv.bhavsar75@gmail.com",
-        contact: "7715944948",
-      },
       theme: {
         color: "#7f1d1d",
       },

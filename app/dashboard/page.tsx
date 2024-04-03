@@ -49,7 +49,7 @@ const Page = async () => {
             <a href={`/dashboard/user/${user.userId}`}>
               <img
                 className="h-full w-full rounded-full object-cover"
-                src={user.profilePictureUrl}
+                src={user.pfpArray[0]}
                 alt=""
               />
             </a>
