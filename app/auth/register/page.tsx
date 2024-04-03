@@ -27,7 +27,8 @@ import React from "react";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const [loading, setLoading] = React.useState<boolean>(false);
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
   });
@@ -47,16 +48,16 @@ const Page = () => {
   let cities = City.getCitiesOfState(s?.countryCode, s?.isoCode);
 
   async function uploadPicture() {
-		if (file) {
-			const formData = new FormData();
-			formData.append('file', file);
-			const response = await fetch('/api/upload', {
-				method: 'POST',
-				body: formData
-			}).then((res) => res.json());
-			return await response.url;
-		}
-	}
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      }).then((res) => res.json());
+      return await response.url;
+    }
+  }
 
   async function handleSubmit(values: z.infer<typeof registerSchema>) {
     if (!file) {
@@ -76,16 +77,19 @@ const Page = () => {
         message: "Passwords do not match",
       });
     }
-    
-    let url = await uploadPicture()
+
+    setLoading(true);
+
+    let url = await uploadPicture();
 
     let res = await fetch("/api/auth/register", {
       method: "POST",
-      body: JSON.stringify({...values, url})
-    })
-    console.log(await res.json())
-    if(res.ok) {
-      router.push('/')
+      body: JSON.stringify({ ...values, url }),
+    });
+    if (res.ok) {
+      router.push("/");
+    } else {
+      setLoading(false);
     }
   }
 
@@ -123,7 +127,9 @@ const Page = () => {
                   className="object-cover hover:opacity-60 cursor-pointer"
                 />
               </Avatar>
-              <p className="text-xs">Tap on the icon above to upload a profile picture</p>
+              <p className="text-xs">
+                Tap on the icon above to upload a profile picture
+              </p>
             </div>
             <Form {...form}>
               <form

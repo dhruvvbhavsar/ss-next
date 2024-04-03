@@ -82,7 +82,9 @@ export default async function Pricing() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <h2 className="col-span-full text-2xl font-bold mb-4">Marriage Counsellors</h2>
+          <h2 className="col-span-full text-2xl font-bold mb-4">
+            Marriage Counsellors
+          </h2>
           {data.astro.map((a, i) => {
             return (
               <Card key={i} className="w-full">
@@ -324,20 +326,17 @@ const sachin = () => {
   );
 };
 
-const BioDialog = ({ astroData }:{astroData: any}) => {
+const BioDialog = ({ astroData }: { astroData: any }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>Read More</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-6xl">
-        <DialogHeader>
-          <ScrollArea className="h-[800px]">
-            {astroData.name === 'Anand Vardhan' ? anand() : sachin()}
-          </ScrollArea>
-        </DialogHeader>
+      <DialogContent className="h-5/6 sm:max-w-6xl">
+        <ScrollArea className="h-full">
+          {astroData.name === "Anand Vardhan" ? anand() : sachin()}
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
 };
-

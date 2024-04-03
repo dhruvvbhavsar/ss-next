@@ -2,6 +2,7 @@ import logo from "@/public/logo.png";
 import Bookmarks from "../dashboard/Bookmarks";
 import { getPageSession } from "@/lib/lucia";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export default async function RootLayout({
   children,
@@ -13,7 +14,7 @@ export default async function RootLayout({
     redirect("/");
   }
   return (
-    <main>
+    <Suspense fallback={<p>loading...</p>}>
       <nav className="flex h-20 flex-row justify-between items-center bg-red-900">
         <div className="my-auto pl-8">
           <img src={logo.src} width="60px" alt="" />
@@ -41,6 +42,6 @@ export default async function RootLayout({
         </div>
       </nav>
       {children}
-    </main>
+    </Suspense>
   );
 }

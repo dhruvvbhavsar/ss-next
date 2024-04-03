@@ -27,7 +27,7 @@ const Page = async () => {
     },
   });
   return (
-    <Suspense fallback={<p>loading...</p>}>
+    <>
       <AlertDial isPaid={user.isPaid} />
       <AlertComplete
         isPaid={user.isPaid}
@@ -39,7 +39,7 @@ const Page = async () => {
           return <Profile key={i} user={u} />;
         })}
       </div>
-    </Suspense>
+    </>
   );
 };
 
