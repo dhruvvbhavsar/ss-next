@@ -67,7 +67,7 @@ const handleRazorpayPayment = async (
 
     // Set up Razorpay options
     const options: RazorpayOptions = {
-      key: "rzp_test_tPwszSO5p3sAdk",
+      key: "rzp_live_DZANp3hV1W7DPq",
       amount: amount.toString(),
       currency,
       name: "Shubh Sambandh",

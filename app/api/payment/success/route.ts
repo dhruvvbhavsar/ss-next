@@ -17,7 +17,7 @@ export const POST = async (request: Request) => {
   let res = validatePaymentVerification(
     { order_id: orderId, payment_id: paymentId },
     signature,
-    "Hj0eitCUdnwQNjW0xCipducA"
+    "uRokxKm6kWRalapGK1h8fIQI"
   );
 
   if (!res) {
