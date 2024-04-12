@@ -17,7 +17,10 @@ const Hero = () => {
             {open ? (
               <X onClick={() => setOpen(!open)} />
             ) : (
-              <Menu onClick={() => setOpen(!open)} />
+              <div className="p-1 flex gap-1 bg-red-700 rounded-md">
+                <Menu onClick={() => setOpen(!open)} />
+                <p>Menu</p>
+              </div>
             )}
           </button>
 
@@ -52,12 +55,24 @@ const Hero = () => {
             >
               Features
             </a>
-            {/* <a
-              href="#testimonials"
+            <a
+              href="#media"
               className="block text-white transition-colors duration-300 md:px-6 hover:text-red-300"
             >
-              Testimonials
-            </a> */}
+              Media
+            </a>
+            <a
+              href="#team"
+              className="block text-white transition-colors duration-300 md:px-6 hover:text-red-300"
+            >
+              Our Team
+            </a>
+            <a
+              href="#astro"
+              className="block text-white transition-colors duration-300 md:px-6 hover:text-red-300"
+            >
+              Astro Help
+            </a>
             <a
               href="#blogs"
               className="block text-white transition-colors duration-300 md:px-6 hover:text-red-300"

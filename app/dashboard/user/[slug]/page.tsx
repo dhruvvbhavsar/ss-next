@@ -55,20 +55,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </h2>
           </div>
 
-          <div className="mt-8 flex gap-4 items-center">
-            <Connect
-              id={connect?.id ?? ""}
-              sender={myId}
-              receiver={user.id}
-              status={isConnected}
-            />
-            <Like
-              id={bookmark?.id ?? ""}
-              receiver={user.id}
-              sender={myId}
-              status={isLiked}
-            />
-          </div>
+          {params.slug !== myId && (
+            <div className="mt-8 flex gap-4 items-center">
+              <Connect
+                id={connect?.id ?? ""}
+                sender={myId}
+                receiver={user.id}
+                status={isConnected}
+              />
+              <Like
+                id={bookmark?.id ?? ""}
+                receiver={user.id}
+                sender={myId}
+                status={isLiked}
+              />
+            </div>
+          )}
         </section>
         <section className="w-full bg-orange-200 text-blue-950 p-8">
           <div className="mb-4 text-2xl font-semibold ">Basic Information</div>
@@ -111,11 +113,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div> */}
           </div>
         </section>
-        {!isPaid && (
-          <Button asChild className="absolute bottom-4 right-4">
-            <Link href="/pricing">Get Premuim</Link>
-          </Button>
-        )}
       </main>
       {isPaid && <PaidDetails id={params.slug} />}
     </Suspense>

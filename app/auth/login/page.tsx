@@ -52,13 +52,17 @@ const Page = () => {
               <h2 className="text-2xl font-bold text-white sm:text-3xl">
                 Shubh Sambandh
               </h2>
-
-              <p className="max-w-xl mt-3 text-white">
-                Welcome to Shubh Sambandh! We are delighted to have you here and
-                look forward to helping you find your perfect match. Please sign
-                in to access your account and begin your journey towards finding
-                your life partner.
-              </p>
+              <div className="max-w-xl mt-3 text-white">
+                <p>
+                  Welcome to Shubh Sambandh! We are delighted to have you join
+                  us on your quest to find your life partner. To get started,
+                  please share some basic information with us to create your
+                  account. Thank you for choosing Shubh Sambandh, we are here to
+                  serve you in every step of your journey. Best of luck!!
+                </p>
+                <br />
+                <p>Hare Krishna!</p>
+              </div>
             </div>
           </div>
         </div>

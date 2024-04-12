@@ -46,6 +46,9 @@ const spiritualSchema = z
     counseslorName: z.string().optional(),
     counselorNumber: z.string().optional(),
     counsellorGuru: z.string().optional(),
+    haveMarrigeCounselor: z.boolean().optional(),
+    isSameAsSpiritualCounselor: z.boolean().optional(),
+    marriageCounselorName: z.string().optional(),
     doYouChant: z.boolean().optional(),
     chantFrequency: z.string().optional(),
     chantingRounds: z.string().optional(),
@@ -147,6 +150,18 @@ const spiritualSchema = z
                 code: z.ZodIssueCode.custom,
                 message: "Please specify the counselor guru",
                 path: ["counsellorGuru"],
+              },
+            ]);
+          }
+        }
+
+        if (data.haveMarrigeCounselor) {
+          if (!data.marriageCounselorName) {
+            throw new ZodError([
+              {
+                code: z.ZodIssueCode.custom,
+                message: "Please specify the marriage counselor name",
+                path: ["marriageCounselorName"],
               },
             ]);
           }
@@ -447,19 +462,22 @@ export default function SpiritualDetails() {
       isAffiliated: false,
       doYouChant: false,
       haveCounselor: false,
+      haveMarrigeCounselor: false,
+      isSameAsSpiritualCounselor: false,
       doYouReadBooks: false,
     },
   });
 
   async function onSubmit(values: z.infer<typeof spiritualSchema>) {
-    let res = await updateDetails("spiritual_details", values);
+    console.log(values)
+    // let res = await updateDetails("spiritual_details", values);
 
-    if (res) {
-      toast.success("Saved");
-      router.push("/dashboard/plus-form/lifestyle");
-    } else {
-      toast.error("Error");
-    }
+    // if (res) {
+    //   toast.success("Saved");
+    //   router.push("/dashboard/plus-form/lifestyle");
+    // } else {
+    //   toast.error("Error");
+    // }
   }
   return (
     <Form {...form}>
@@ -704,6 +722,78 @@ export default function SpiritualDetails() {
                         </FormItem>
                       )}
                     />
+                  </>
+                )}
+
+                <FormField
+                  control={form.control}
+                  name="haveMarrigeCounselor"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>
+                          Do you have a marriage counselor in ISKCON?
+                        </FormLabel>
+                        <FormDescription>
+                          Please Check the box if yes
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                {form.watch("haveMarrigeCounselor") && (
+                  <>
+                    {form.watch("haveCounselor") && (
+                      <FormField
+                        control={form.control}
+                        name="isSameAsSpiritualCounselor"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                              />
+                            </FormControl>
+                            <div className="space-y-1 leading-none">
+                              <FormLabel>
+                                Is your marriage counselor the same as the
+                                spiritual counselor?
+                              </FormLabel>
+                              <FormDescription>
+                                Please Check the box if yes
+                              </FormDescription>
+                            </div>
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
+                    {!form.watch("isSameAsSpiritualCounselor") && (
+                      <FormField
+                        control={form.control}
+                        name="marriageCounselorName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              Name of the marriage counselor
+                            </FormLabel>
+                            <Input {...field} />
+                            <FormDescription>
+                              Please specify the name of the marriage counselor
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
                   </>
                 )}
 

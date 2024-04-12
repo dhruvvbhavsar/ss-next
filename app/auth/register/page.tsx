@@ -87,9 +87,12 @@ const Page = () => {
       body: JSON.stringify({ ...values, url }),
     });
     if (res.ok) {
-      router.push("/");
+      router.push("/dashboard");
     } else {
       setLoading(false);
+      form.setError("root", {
+        message: "user already exists with this email address or phone number",
+      });
     }
   }
 
@@ -294,11 +297,11 @@ const Page = () => {
                   name="caste"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Caste</FormLabel>
+                      <FormLabel>Religon</FormLabel>
                       <Select onValueChange={field.onChange}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select Caste" />
+                            <SelectValue placeholder="Select Religon" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -322,10 +325,10 @@ const Page = () => {
                     name="other_caste"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Please specify the caste</FormLabel>
+                        <FormLabel>Please specify the religon</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Enter Caste"
+                            placeholder="Enter Religon"
                             className="text-black"
                             {...field}
                           />
@@ -460,7 +463,9 @@ const Page = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button disabled={loading} type="submit">
+                  {loading ? "loading" : "Submit"}
+                </Button>
               </form>
             </Form>
           </div>

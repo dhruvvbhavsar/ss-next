@@ -51,7 +51,7 @@ const AlertDial = ({ isPaid }: { isPaid: boolean }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Let's get you a premium membership...
+            Get Shubh Sambandh Plus to serve you better
           </AlertDialogTitle>
           <AlertDialogDescription>
             Get personalized matches, unlimited enquiries and more!

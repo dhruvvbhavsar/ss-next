@@ -30,7 +30,7 @@ const PaidDetails = async ({ id }: { id: string }) => {
         {Object.keys(data).map((key) => {
           return (
             <div key={key} className="py-4">
-              <h2 className="text-xl font-bold mb-2 text-center">
+              <h2 className="text-xl capitalize font-bold mb-2 text-center">
                 {key.split("_").join(" ")}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
